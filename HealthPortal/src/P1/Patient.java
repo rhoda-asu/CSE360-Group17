@@ -2,6 +2,12 @@ package P1;
 
 import java.util.ArrayList;
 
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+
 public class Patient extends User{
 	private double height;
 	private double weight;
@@ -15,14 +21,14 @@ public class Patient extends User{
 	}
 	
 
-	public Patient(String ID, String name, String password, double height, double weight, String sex, ArrayList<HistoryEntry> medicalHistory, ArrayList<TestEntry> tests, ArrayList<Appointment> schedule, String email) {
+	public Patient(String ID, String name, String password, String email) {
 		super(ID, name, password, email);
-		this.height = height;
-		this.weight = weight;
-		this.sex = sex;
-		this.medicalHistory = medicalHistory;
-		this.tests = tests;
-		this.schedule = schedule;
+		this.height = 0.0;
+		this.weight = 0.0;
+		this.sex = "";
+		this.medicalHistory = new ArrayList<HistoryEntry>();
+		this.tests = new ArrayList<TestEntry>();
+		this.schedule = new ArrayList<Appointment>();
 	}
 
 
@@ -86,7 +92,23 @@ public class Patient extends User{
 	}
 	
 	@Override
-	public void view() {}
+	public Scene view() {
+		GridPane pane = new GridPane();
+		pane.setAlignment(Pos.BASELINE_CENTER);
+		pane.setHgap(5.5);
+		pane.setVgap(1.5);
+		
+		Label title = new Label("Welcome to the Patient Portal " + super.getName());
+		
+		Button scheduleAppointment = new Button("Schedule Appointment");
+		Button messageDoctor = new Button("Message Doctor");
+		Button viewHistory = new Button("View Medical History");
+		Button viewAppointments = new Button("View Upcoming Appointments");
+		
+		pane.addColumn(1, title, scheduleAppointment, messageDoctor, viewHistory, viewAppointments);
+		Scene patientPortalScene = new Scene(pane, 600, 350);
+		return patientPortalScene;
+	}
 	
 	
 	

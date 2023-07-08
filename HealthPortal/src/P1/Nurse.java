@@ -2,6 +2,12 @@ package P1;
 
 import java.util.ArrayList;
 
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+
 public class Nurse extends User{
 	
 	private ArrayList<Appointment> schedule;
@@ -11,10 +17,10 @@ public class Nurse extends User{
 		super();
 	}
 
-	public Nurse(ArrayList<Appointment> schedule, ArrayList<String> patients, String ID, String name, String password, String email) {
+	public Nurse(String ID, String name, String password, String email) {
 		super(ID, name, password, email);
-		this.schedule = schedule;
-		this.patients = patients;
+		this.schedule = new ArrayList<Appointment>();
+		this.patients = new ArrayList<String>();
 	}
 
 	public ArrayList<Appointment> getSchedule() {
@@ -34,6 +40,22 @@ public class Nurse extends User{
 	}
 	
 	@Override
-	public void view() {}
+	public Scene view() {
+		GridPane pane = new GridPane();
+		pane.setAlignment(Pos.BASELINE_CENTER);
+		pane.setHgap(5.5);
+		pane.setVgap(1.5);
+		
+		Label title = new Label("Welcome to the Nurse Portal " + super.getName());
+		
+		Button createPatient = new Button("Create Patient");//when patients walk in without signing up
+		Button viewPatientButton = new Button("View Patient");
+		Button editPatientButton = new Button("Edit Patient");
+		Button scheduleAppointmentButton = new Button("Schedule Appointment");
+		
+		pane.addColumn(1, title, createPatient, viewPatientButton, editPatientButton, scheduleAppointmentButton);
+		Scene nursePortalScene = new Scene(pane, 600, 350);
+		return nursePortalScene;
+	}
 	
 }
