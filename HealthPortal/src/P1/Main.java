@@ -58,11 +58,11 @@ public class Main extends Application{
 		Label rePasswordLabel = new Label("Re-enter password: ");
 		Label signUpTitle = new Label("Sign up Page");
 		
-		TextField firstNameTextField = new TextField("First name: ");
-		TextField lastNameTextField = new TextField("Last name: ");
-		TextField emailTextField = new TextField("Email: ");
-		TextField passwordTextField = new TextField("Password: ");
-		TextField rePasswordTextField = new TextField("Re-enter password: ");
+		TextField firstNameTextField = new TextField();
+		TextField lastNameTextField = new TextField();
+		TextField emailTextField = new TextField();
+		TextField passwordTextField = new TextField();
+		TextField rePasswordTextField = new TextField();
 		
 		Button backButton = new Button("Back");
 		Button createAccountButton = new Button("Create account");
@@ -146,6 +146,8 @@ public class Main extends Application{
 						alert.setTitle("Success!");
 						alert.setHeaderText("Your User ID is : " + newID + "\n\nKeep this information in a safe place, as it is needed for login.");
 						alert.showAndWait();
+						primaryStage.setScene(loginScene);
+						primaryStage.show();
 					}
 					else {
 						Alert alert = new Alert(AlertType.ERROR);

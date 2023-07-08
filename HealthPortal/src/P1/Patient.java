@@ -96,7 +96,7 @@ public class Patient extends User{
 		GridPane pane = new GridPane();
 		pane.setAlignment(Pos.BASELINE_CENTER);
 		pane.setHgap(5.5);
-		pane.setVgap(1.5);
+		pane.setVgap(15);
 		
 		Label title = new Label("Welcome to the Patient Portal " + super.getName());
 		
