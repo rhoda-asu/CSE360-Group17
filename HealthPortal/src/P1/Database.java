@@ -92,4 +92,11 @@ public class Database implements Serializable {
             saveDatabaseToFile();
         }
     }
+    
+    public void updateUser(User user) {
+        if (this.database.containsKey(user.getID())) {
+            this.database.put(user.getID(), user);
+            saveDatabaseToFile(); // Save the updated database to the file
+        }
+    }
 }
