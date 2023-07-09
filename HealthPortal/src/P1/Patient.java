@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class Patient extends User{
 	private double height;
@@ -92,7 +93,7 @@ public class Patient extends User{
 	}
 	
 	@Override
-	public Scene view() {
+	public void view(Stage primaryStage) {
 		GridPane pane = new GridPane();
 		pane.setAlignment(Pos.BASELINE_CENTER);
 		pane.setHgap(5.5);
@@ -107,7 +108,8 @@ public class Patient extends User{
 		
 		pane.addColumn(1, title, scheduleAppointment, messageDoctor, viewHistory, viewAppointments);
 		Scene patientPortalScene = new Scene(pane, 600, 350);
-		return patientPortalScene;
+		primaryStage.setScene(patientPortalScene);
+		primaryStage.show();
 	}
 	
 	

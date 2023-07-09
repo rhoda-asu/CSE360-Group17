@@ -1,6 +1,6 @@
 package P1;
 import javafx.application.*;
-import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public abstract class User {
 	private String ID;
@@ -17,7 +17,7 @@ public abstract class User {
 		this.email = email;
 	}
 	
-	abstract public Scene view();
+	abstract public void view(Stage primaryStage);
 
 	public String getID() {
 		return ID;

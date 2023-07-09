@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class Nurse extends User{
 	
@@ -40,7 +41,7 @@ public class Nurse extends User{
 	}
 	
 	@Override
-	public Scene view() {
+	public void view(Stage primaryStage) {
 		GridPane pane = new GridPane();
 		pane.setAlignment(Pos.BASELINE_CENTER);
 		pane.setHgap(5.5);
@@ -55,7 +56,8 @@ public class Nurse extends User{
 		
 		pane.addColumn(1, title, createPatient, viewPatientButton, editPatientButton, scheduleAppointmentButton);
 		Scene nursePortalScene = new Scene(pane, 600, 350);
-		return nursePortalScene;
+		primaryStage.setScene(nursePortalScene);
+		primaryStage.show();
 	}
 	
 }

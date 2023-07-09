@@ -104,7 +104,7 @@ public class Main extends Application{
 				}
 				else {
 					if(userDatabase.checkPassword(IDField.getText(), passField.getText())) {
-						primaryStage.setScene(userDatabase.getUser(IDField.getText()).view());
+						userDatabase.getUser(IDField.getText()).view(primaryStage);
 					}
 					else {
 						Alert alert = new Alert(AlertType.ERROR);

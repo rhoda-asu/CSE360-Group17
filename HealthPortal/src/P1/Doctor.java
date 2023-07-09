@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.stage.Popup;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -46,7 +47,7 @@ public class Doctor extends User{
 	}
 	
 	@Override
-	public Scene view() {
+	public void view(Stage primaryStage) {
 		GridPane pane = new GridPane();
 		pane.setAlignment(Pos.BASELINE_CENTER);
 		pane.setHgap(5.5);
@@ -58,10 +59,19 @@ public class Doctor extends User{
 		Button addHistoryButton = new Button("Create med. history entry");
 		Button editPatientButton = new Button("Edit patient");
 		Button testPatientButton = new Button("Test patient");
+
+		TextField patientIDField = new TextField();
 		
 		pane.addColumn(1, title, viewPatientButton, addHistoryButton, editPatientButton, testPatientButton);
 		Scene doctorPortalScene = new Scene(pane, 600, 350);
-		return doctorPortalScene;
+		primaryStage.setScene(doctorPortalScene);
+		primaryStage.show();
 	}	
+	
+//	private void viewPatient(Stage primaryStage) {
+//		GridPane viewPane = new GridPane();
+//		Button searchButton = new Button("Search");
+//		Label patientIDLabel = new Label("Patient ID: ");
+//	}
 	
 }
