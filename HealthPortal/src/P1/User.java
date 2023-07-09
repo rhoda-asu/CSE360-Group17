@@ -46,5 +46,12 @@ public abstract class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public void updateInformation(String name, String password, String email) {
+    		this.name = name;
+    		this.password = password;
+    		this.email = email;
+    		Database.getInstance().updateUser(this);
+	}
 	
 }
