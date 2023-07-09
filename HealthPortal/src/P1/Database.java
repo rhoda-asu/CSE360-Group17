@@ -14,7 +14,6 @@ public class Database implements Serializable {
     public String createUser(int opt, String name, String password, String email) {
         String ID = "";
         // Generate a unique ID
-        // You can use your own logic to generate unique IDs
         // Here, we're using a simple random number generation
         ID = Integer.toString((int) (Math.random() * 1000));
         
