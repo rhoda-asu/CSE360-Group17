@@ -19,6 +19,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		
 		Database userDatabase = new Database();
+		userDatabase.initializeDatabase(); // Initialize the database by loading or saving it from/to the file
 		
 		GridPane login = new GridPane();
 		
