@@ -70,12 +70,9 @@ public class Doctor extends User {
         primaryStage.setScene(this.doctorPortalScene);
         primaryStage.show();
 
-        viewPatientButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                viewPatient();
-            }
-        });
+        viewPatientButton.setOnAction( e -> viewPatient());
+        
+        editPatientButton.setOnAction(e -> editPatient());
     }
 
     private void viewPatient() {
