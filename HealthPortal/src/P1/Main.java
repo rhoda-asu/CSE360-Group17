@@ -1,24 +1,26 @@
 package P1;
 
-import java.util.HashMap;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.HPos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class Main extends Application{
-
+	private Database userDatabase = new Database();
+		
 	public void start(Stage primaryStage) {
 		
-		Database userDatabase = new Database();
 		userDatabase.initializeDatabase(); // Initialize the database by loading or saving it from/to the file
 		
 		GridPane login = new GridPane();
@@ -95,7 +97,7 @@ public class Main extends Application{
 		
 		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
-				if(IDField.getText().isEmpty() || passField.getText().isEmpty()) {
+				if(IDField.getText().isEmpty() || passField.getText().isEmpty() || userType.getSelectionModel().isEmpty()) {
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Warning");
 					alert.setHeaderText("ID or password missing.");

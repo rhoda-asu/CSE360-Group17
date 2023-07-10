@@ -19,6 +19,8 @@ import javafx.geometry.HPos;
 public class Doctor extends User{
 	private ArrayList<Appointment> schedule;
 	private ArrayList<String> patients; //saves patients as strings of their ID's. 
+	private Stage secondaryStage;
+	private Scene doctorPortalScene;
 	
 	public Doctor() {
 		super();
@@ -48,6 +50,7 @@ public class Doctor extends User{
 	
 	@Override
 	public void view(Stage primaryStage) {
+		this.secondaryStage = primaryStage;
 		GridPane pane = new GridPane();
 		pane.setAlignment(Pos.BASELINE_CENTER);
 		pane.setHgap(5.5);
@@ -59,19 +62,68 @@ public class Doctor extends User{
 		Button addHistoryButton = new Button("Create med. history entry");
 		Button editPatientButton = new Button("Edit patient");
 		Button testPatientButton = new Button("Test patient");
-
-		TextField patientIDField = new TextField();
 		
 		pane.addColumn(1, title, viewPatientButton, addHistoryButton, editPatientButton, testPatientButton);
-		Scene doctorPortalScene = new Scene(pane, 600, 350);
-		primaryStage.setScene(doctorPortalScene);
+		this.doctorPortalScene = new Scene(pane, 600, 350);
+		primaryStage.setScene(this.doctorPortalScene);
 		primaryStage.show();
+		
+		viewPatientButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				viewPatient();
+			}
+		});
 	}	
 	
-//	private void viewPatient(Stage primaryStage) {
-//		GridPane viewPane = new GridPane();
-//		Button searchButton = new Button("Search");
-//		Label patientIDLabel = new Label("Patient ID: ");
-//	}
+	private void viewPatient() {
+		
+		GridPane viewPane = new GridPane();
+		viewPane.setAlignment(Pos.CENTER);
+		viewPane.setHgap(5.5);
+		viewPane.setVgap(15);
+		
+		Label patientIDLabel = new Label("Patient ID: ");
+				
+		Button searchButton = new Button("Search");
+		Button backButton = new Button ("Back");
+		
+		TextField patientIDField = new TextField();
+		
+		TextArea patientArea = new TextArea();
+		patientArea.setEditable(false);
+		
+		viewPane.add(backButton, 0, 0);
+		viewPane.add(patientIDLabel, 0, 2);
+		viewPane.add(searchButton, 2, 2);
+		viewPane.add(patientIDField, 1, 2);
+		viewPane.add(patientArea, 1, 3);
+		
+		Scene patientViewScene = new Scene(viewPane, 600, 350);
+		
+		this.secondaryStage.setScene(patientViewScene);
+		this.secondaryStage.show();
+		
+		searchButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				patientArea.setText(searchPatient(patientIDField.getText()).toString());
+			}
+		});
+		
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				secondaryStage.setScene(doctorPortalScene);
+				secondaryStage.show();
+			}
+		});
+		
+	}
+	
+	private User searchPatient(String ID) {
+		Database obj = new Database();
+		obj.initializeDatabase();
+		if(obj.userExists(ID))
+			return obj.getUser(ID);
+		return null;
+	}
 	
 }

@@ -99,4 +99,8 @@ public class Database implements Serializable {
             saveDatabaseToFile(); // Save the updated database to the file
         }
     }
+    
+    public boolean userExists(String ID) {
+    	return this.database.containsKey(ID);
+    }
 }

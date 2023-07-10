@@ -34,6 +34,8 @@ public abstract class User {
 	public String getEmail() {
 		return email;
 	}
+	
+
 
 	public void setID(String iD) {
 		ID = iD;
@@ -46,6 +48,7 @@ public abstract class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
 	/*public void updateInformation(String name, String password, String email) {
     		this.name = name;

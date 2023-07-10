@@ -17,5 +17,10 @@ public class TestEntry {
 		this.observations = observations;
 	}
 	
+	@Override
+	public String toString() {
+		return "Doctor Testing: " + this.doctorID + "\nType of Test: " + this.typeOfTest + "\nResults: " + this.results + "\nObservations: " + this.observations;
+	}
+	
 	
 }

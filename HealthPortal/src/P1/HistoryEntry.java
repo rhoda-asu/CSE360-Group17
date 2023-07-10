@@ -2,6 +2,7 @@ package P1;
 
 public class HistoryEntry {
 	private int ID;
+	private String date;
 	private String text;
 	private int heartRate;
 	private int bloodPressure;
@@ -9,12 +10,13 @@ public class HistoryEntry {
 	
 	public HistoryEntry() {}
 	
-	public HistoryEntry(int ID, String text, int heartRate, int bloodPressure, float temperature) {
+	public HistoryEntry(int ID, String text, int heartRate, int bloodPressure, float temperature, String date) {
 		this.ID = ID;
 		this.text = text;
 		this.heartRate = heartRate;
 		this.bloodPressure = bloodPressure;
 		this.temperature = temperature;
+		this.date = date;
 	}
 
 	public int getID() {
@@ -36,9 +38,13 @@ public class HistoryEntry {
 	public float getTemperature() {
 		return temperature;
 	}
+	
+	public String getDate() {
+		return this.date;
+	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
 	public void setText(String text) {
@@ -57,5 +63,12 @@ public class HistoryEntry {
 		this.temperature = temperature;
 	}
 	
+	public void setDate(String date) {
+		this.date = date;
+	}
 	
+	@Override
+	public String toString() {
+		return "Date: " + this.date + "\nHeart Rate: " + this.heartRate + "\nBlood Pressure: " + this.bloodPressure + "\nTemperature: " + this.temperature + "\nObservations: " + this.text;
+	}
 }

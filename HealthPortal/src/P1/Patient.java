@@ -112,6 +112,33 @@ public class Patient extends User{
 		primaryStage.show();
 	}
 	
+	@Override
+	public String toString() {
+		return (
+				"Name: " + super.getName() + 
+				"\nHeight: " + this.height + 
+				"\nWeight: " + this.weight + 
+				"\nSex: " + this.sex + 
+				"\nMedical History:" + printHistory() + 
+				"\nTests: " + printTests() + "\n"
+				);
+	}
+	
+	public String printHistory() {
+		String str = "";
+		for(int i = 0; i < this.medicalHistory.size(); i++) {
+			str += this.medicalHistory.get(i).toString() + "\n";
+		}
+		return str;
+	}
+	
+	public String printTests() {
+		String str = "";
+		for(int i = 0; i < this.tests.size(); i++) {
+			str += this.tests.get(i).toString() + "\n";
+		}
+		return str;
+	}
 	
 	
 }
