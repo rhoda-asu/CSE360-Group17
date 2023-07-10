@@ -34,10 +34,12 @@ public class Nurse extends User{
 
 	public void setSchedule(ArrayList<Appointment> schedule) {
 		this.schedule = schedule;
+		Database.getInstance().addNurse(this); // Update the Nurse object in the database
 	}
 
 	public void setPatients(ArrayList<String> patients) {
 		this.patients = patients;
+		Database.getInstance().addNurse(this); // Update the Nurse object in the database
 	}
 	
 	@Override
