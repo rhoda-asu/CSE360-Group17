@@ -75,6 +75,18 @@ public class Nurse extends User{
 		Scene nursePortalScene = new Scene(pane, 600, 350);
 		this.secondaryStage.setScene(nursePortalScene);
 		this.secondaryStage.show();
+		
+		createPatient.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					createPatient();
+				}
+			});
+		
+		viewPatientButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				viewPatient();
+			}
+		});
 	}
 	
 	private User searchPatient(String ID) {
