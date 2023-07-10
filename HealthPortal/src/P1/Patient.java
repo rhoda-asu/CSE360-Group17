@@ -20,14 +20,19 @@ import javafx.geometry.Insets;
 import java.io.Serializable;
 
 
-
-public class Patient extends User{
+public class Patient extends User implements Serializable{
 	private double height;
 	private double weight;
-	private String sex;
+	private String sex;/*
 	private ArrayList<HistoryEntry> medicalHistory;
 	private ArrayList<TestEntry> tests;
-	private ArrayList<Appointment> schedule;
+	private ArrayList<Appointment> schedule;*/
+	// Mark non-serializable fields as transient
+    private transient ArrayList<HistoryEntry> medicalHistory;
+    private transient ArrayList<TestEntry> tests;
+    private transient ArrayList<Appointment> schedule;
+    private static final long serialVersionUID = -2512665654797010727L;
+
 	private Stage messagingStage; // Define messagingStage as an instance variable
 	
 	public Patient() {
@@ -335,5 +340,4 @@ public class Patient extends User{
             historyArea.setText(sb.toString());
         }
     }
-}
 }
