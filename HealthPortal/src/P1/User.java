@@ -1,8 +1,10 @@
 package P1;
+import java.io.Serializable;
+
 import javafx.application.*;
 import javafx.stage.Stage;
 
-public abstract class User {
+public abstract class User implements Serializable{
 	private String ID;
 	private String name;
 	private String password;
