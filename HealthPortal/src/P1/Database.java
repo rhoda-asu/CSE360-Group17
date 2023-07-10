@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Database implements Serializable {
     private HashMap<String, User> database;
     private static final String filePath = "database.ser";
+    private static Database instance; // static instance variable
 
     public Database() {
         this.database = new HashMap<>();
@@ -100,7 +101,26 @@ public class Database implements Serializable {
         }
     }
     
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
+    
     public boolean userExists(String ID) {
     	return this.database.containsKey(ID);
+    }
+    
+    public void addPatient(Patient patient) {
+        this.database.put(patient.getID(), patient);
+    }
+    
+    public void addDoctor(Doctor doctor) {
+        this.database.put(doctor.getID(), doctor);
+    }
+    
+    public void addNurse(Nurse nurse) {
+        this.database.put(nurse.getID(), nurse);
     }
 }
