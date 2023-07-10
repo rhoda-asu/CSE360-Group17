@@ -65,31 +65,37 @@ public class Patient extends User{
 
 	public void setHeight(double height) {
 		this.height = height;
+		Database.getInstance().addPatient(this); // Update the Patient object in the database
 	}
 
 
 	public void setWeight(double weight) {
 		this.weight = weight;
+		Database.getInstance().addPatient(this); // Update the Patient object in the database
 	}
 
 
 	public void setSex(String sex) {
 		this.sex = sex;
+		Database.getInstance().addPatient(this); // Update the Patient object in the database
 	}
 
 
 	public void setMedicalHistory(ArrayList<HistoryEntry> medicalHistory) {
 		this.medicalHistory = medicalHistory;
+		Database.getInstance().addPatient(this); // Update the Patient object in the database
 	}
 
 
 	public void setTests(ArrayList<TestEntry> tests) {
 		this.tests = tests;
+		Database.getInstance().addPatient(this); // Update the Patient object in the database
 	}
 
 
 	public void setSchedule(ArrayList<Appointment> schedule) {
 		this.schedule = schedule;
+		Database.getInstance().addPatient(this); // Update the Patient object in the database
 	}
 	
 	@Override
