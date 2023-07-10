@@ -131,5 +131,75 @@ public class Doctor extends User {
     private User searchPatient(String ID) {
         return Database.getInstance().getUser(ID);
     }
+    
+    private void editPatient() {
+    		GridPane editPane = new GridPane();
+    		editPane.setAlignment(Pos.CENTER);
+    		editPane.setHgap(5.5);
+    		editPane.setVgap(15);
+    		
+    		Label firstNameLabel = new Label("First name: ");
+    		Label lastNameLabel = new Label("Last name: ");
+    		Label emailLabel = new Label("Email: ");
+    		Label heightLabel = new Label("Height: ");
+    		Label weightLabel = new Label("Weight: ");
+    		Label saveChanges = new Label("Save changes");
+    		Label IDLabel = new Label("Enter ID: ");
+    		
+    		TextField firstNameTextField = new TextField();
+    		TextField lastNameTextField = new TextField();
+    		TextField emailTextField = new TextField();
+    		TextField heightTextField = new TextField();
+    		TextField weightTextField = new TextField();
+    		TextField IDTextField = new TextField();
+    		
+    		Button searchButton = new Button("Search");
+    		Button backButton1 = new Button("Back");
+    		Button saveButton = new Button("Save");
+    		
+    		editPane.add(backButton1, 0, 0);
+    		editPane.add(searchButton, 0, 2);
+    		editPane.add(IDTextField, 1, 2);
+    		editPane.addRow(3, firstNameLabel, firstNameTextField);
+    		editPane.addRow(4, lastNameLabel, lastNameTextField);    
+    		editPane.addRow(5, emailLabel, emailTextField);
+    		editPane.addRow(6, heightLabel, heightTextField);
+    		editPane.addRow(7, weightLabel, weightTextField);
+    		editPane.add(saveButton, 1, 9);
+    		
+    		Scene editScene = new Scene(editPane, 600, 350);
+    		
+    		this.secondaryStage.setScene(editScene);
+    		this.secondaryStage.show();
+    		
+    		Database userDatabase = new Database();
+    		userDatabase.initializeDatabase();
+    		
+    		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+    			@Override public void handle(ActionEvent e) {
+    				if(firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || heightTextField.getText().isEmpty() || weightTextField.getText().isEmpty()) {
+    					Alert alert = new Alert(AlertType.WARNING);
+    					alert.setTitle("Warning");
+    					alert.setHeaderText("Information Missing.");
+    					alert.setContentText("Make sure all fields are complete before pressing the Create Account button.");
+    					alert.showAndWait();
+    				}
+    			}
+    		});
+    		
+    		backButton1.setOnAction(new EventHandler<ActionEvent>() {
+    			@Override public void handle(ActionEvent e) {
+    				secondaryStage.setScene(doctorPortalScene);
+    				secondaryStage.show();
+    			}
+    		});
+    		
+    		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+    			@Override public void handle(ActionEvent e) {
+    				User p = searchPatient(IDTextField.getText());
+    				
+    			}
+    		});
+    	}
 }
 
