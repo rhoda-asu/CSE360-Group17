@@ -147,10 +147,15 @@ public class Doctor extends User {
     		Label IDLabel = new Label("Enter ID: ");
     		
     		TextField firstNameTextField = new TextField();
+    		firstNameTextField.setEditable(false);
     		TextField lastNameTextField = new TextField();
+    		lastNameTextField.setEditable(false);
     		TextField emailTextField = new TextField();
+    		emailTextField.setEditable(false);
     		TextField heightTextField = new TextField();
+    		heightTextField.setEditable(false);
     		TextField weightTextField = new TextField();
+    		weightTextField.setEditable(false);
     		TextField IDTextField = new TextField();
     		
     		Button searchButton = new Button("Search");
@@ -181,8 +186,15 @@ public class Doctor extends User {
     					Alert alert = new Alert(AlertType.WARNING);
     					alert.setTitle("Warning");
     					alert.setHeaderText("Information Missing.");
-    					alert.setContentText("Make sure all fields are complete before pressing the Create Account button.");
+    					alert.setContentText("Make sure all fields are complete.");
     					alert.showAndWait();
+    				}
+    				else{
+    					Patient p = (Patient)searchPatient(IDTextField.getText());
+    					p.setName(firstNameTextField.getText() + lastNameTextField.getText());
+    					p.setEmail(emailTextField.getText());
+    					p.setHeight(Double.parseDouble(heightTextField.getText()));
+    					p.setWeight(Double.parseDouble(weightTextField.getText()));
     				}
     			}
     		});
@@ -194,9 +206,28 @@ public class Doctor extends User {
     			}
     		});
     		
-    		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+    		searchButton.setOnAction(new EventHandler<ActionEvent>() {
     			@Override public void handle(ActionEvent e) {
-    				User p = searchPatient(IDTextField.getText());
+    				Patient p = (Patient)searchPatient(IDTextField.getText());
+    				if(p.equals(null)) {
+    					Alert alert = new Alert(AlertType.WARNING);
+    					alert.setTitle("Warning");
+    					alert.setHeaderText("User not found.");
+    					alert.setContentText("A user with the patient ID entered couldn't be found.");
+    					alert.showAndWait();
+    				}
+    				else {
+    					firstNameTextField.setText(p.getName());
+    					firstNameTextField.setEditable(true);
+    					lastNameTextField.setText(p.getName());
+    					lastNameTextField.setEditable(true);
+    					emailTextField.setText(p.getEmail());		
+    					emailTextField.setEditable(true);
+    					weightTextField.setText(String.valueOf(p.getWeight()));		
+    					weightTextField.setEditable(true);
+    					heightTextField.setText(String.valueOf(p.getHeight()));		
+    					heightTextField.setEditable(true);
+    				}
     				
     			}
     		});
