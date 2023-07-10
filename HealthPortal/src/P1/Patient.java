@@ -17,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 //import javafx.scene.layout.ScrollPane;
 import javafx.scene.control.ScrollPane;
 import javafx.geometry.Insets;
-
+import java.io.Serializable;
 
 
 
