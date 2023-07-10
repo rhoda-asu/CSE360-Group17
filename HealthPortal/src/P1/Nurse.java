@@ -72,8 +72,8 @@ public class Nurse extends User{
 		Button scheduleAppointmentButton = new Button("Schedule Appointment");
 		
 		pane.addColumn(1, title, createPatient, viewPatientButton, editPatientButton, scheduleAppointmentButton);
-		Scene nursePortalScene = new Scene(pane, 600, 350);
-		this.secondaryStage.setScene(nursePortalScene);
+		this.nursePortalScene = new Scene(pane, 600, 350);
+		this.secondaryStage.setScene(this.nursePortalScene);
 		this.secondaryStage.show();
 		
 		createPatient.setOnAction(new EventHandler<ActionEvent>() {
