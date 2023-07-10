@@ -159,11 +159,11 @@ public class Nurse extends User{
 		TextField passwordTextField = new TextField();
 		TextField rePasswordTextField = new TextField();
 		
-		Button backButton = new Button("Back");
+		Button backButton1 = new Button("Back");
 		Button createAccountButton = new Button("Create account");
 			
 		
-		signUpPane.add(backButton, 0, 0);
+		signUpPane.add(backButton1, 0, 0);
 		signUpPane.add(firstNameLabel, 0, 2);
 		signUpPane.add(lastNameLabel, 0, 3);
 		signUpPane.add(emailLabel, 0, 4);
@@ -179,6 +179,9 @@ public class Nurse extends User{
 		signUpPane.add(createAccountButton, 1, 7);
 		
 		Scene signUpScene = new Scene(signUpPane, 600, 350);
+		
+		this.secondaryStage.setScene(signUpScene);
+		this.secondaryStage.show();
 		
 		Database userDatabase = new Database();
 		userDatabase.initializeDatabase();
@@ -213,7 +216,7 @@ public class Nurse extends User{
 			}
 		});
 		
-		backButton.setOnAction(new EventHandler<ActionEvent>() {
+		backButton1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				secondaryStage.setScene(nursePortalScene);
 				secondaryStage.show();
