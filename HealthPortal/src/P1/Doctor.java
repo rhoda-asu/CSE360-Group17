@@ -229,5 +229,93 @@ public class Doctor extends User {
     			}
     		});
     	}
+    
+    private void testPatient() {
+		GridPane testPane = new GridPane();
+		testPane.setAlignment(Pos.CENTER);
+		testPane.setHgap(5.5);
+		testPane.setVgap(15);
+		
+		Label typeLabel = new Label("Type of Test: ");
+		Label resultsLabel = new Label("Results: ");
+		Label observationsLabel = new Label("Observations: ");
+		Label IDLabel = new Label("Enter Patient's ID: ");
+		Label doctorIDLabel = new Label("Doctor ID");
+		
+		TextField typeTextField = new TextField();
+		typeTextField.setEditable(false);
+		TextField resultsTextField = new TextField();
+		resultsTextField.setEditable(false);
+		TextField observationsTextField = new TextField();
+		observationsTextField.setEditable(false);
+		TextField IDTextField = new TextField();
+		TextField doctorIDTextField = new TextField();
+		
+		
+		Button searchButton = new Button("Search");
+		Button backButton1 = new Button("Back");
+		Button saveButton = new Button("Save");
+		
+		testPane.add(backButton1, 0, 0);
+		testPane.add(searchButton, 2, 2);
+		testPane.add(IDTextField, 1, 2);
+		testPane.add(IDLabel, 0, 2);
+		testPane.addRow(3, typeLabel, typeTextField);
+		testPane.addRow(4, resultsLabel, resultsTextField);    
+		testPane.addRow(5, observationsLabel, observationsTextField);
+		testPane.addRow(5, doctorIDLabel, doctorIDTextField);
+		testPane.add(saveButton, 1, 7);
+		
+		Scene editScene = new Scene(testPane, 600, 350);
+		
+		this.secondaryStage.setScene(editScene);
+		this.secondaryStage.show();
+		
+		Database userDatabase = new Database();
+		userDatabase.initializeDatabase();
+		
+		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				if(typeTextField.getText().isEmpty() || resultsTextField.getText().isEmpty() || observationsTextField.getText().isEmpty()) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Warning");
+					alert.setHeaderText("Information Missing.");
+					alert.setContentText("Make sure all fields are complete.");
+					alert.showAndWait();
+				}
+				else{
+					Patient p = (Patient)searchPatient(IDTextField.getText());
+					TestEntry x = new TestEntry(typeTextField.getText(), doctorIDTextField.getText(), IDTextField.getText(), resultsTextField.getText(), observationsTextField.getText());
+					p.getTests().add(x);
+				}
+			}
+		});
+		
+		backButton1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				secondaryStage.setScene(doctorPortalScene);
+				secondaryStage.show();
+			}
+		});
+		
+		searchButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				Patient p = (Patient)searchPatient(IDTextField.getText());
+				if(p.equals(null)) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Warning");
+					alert.setHeaderText("User not found.");
+					alert.setContentText("A user with the patient ID entered couldn't be found.");
+					alert.showAndWait();
+				}
+				else {
+					typeTextField.setEditable(true);
+					resultsTextField.setEditable(true);		
+					observationsTextField.setEditable(true);
+				}
+				
+			}
+		});
+	}
 }
 

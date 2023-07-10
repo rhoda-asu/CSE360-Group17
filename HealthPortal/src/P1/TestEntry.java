@@ -19,7 +19,7 @@ public class TestEntry {
 	
 	@Override
 	public String toString() {
-		return "Doctor Testing: " + this.doctorID + "\nType of Test: " + this.typeOfTest + "\nResults: " + this.results + "\nObservations: " + this.observations;
+		return "Doctor Testing: " + this.doctorID + "Patient being Tested: " + this.patientID + "\nType of Test: " + this.typeOfTest + "\nResults: " + this.results + "\nObservations: " + this.observations;
 	}
 	
 	
