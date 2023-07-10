@@ -20,6 +20,10 @@ import javafx.scene.layout.Region;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+
 
 public class Nurse extends User {
     private ArrayList<Appointment> schedule;
