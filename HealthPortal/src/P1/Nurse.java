@@ -82,6 +82,8 @@ public class Nurse extends User {
         createPatient.setOnAction(e -> createPatient());
 
         viewPatientButton.setOnAction(e -> viewPatient());
+        
+        editPatientButton.setOnAction(e -> editPatient());
 
         scheduleAppointmentButton.setOnAction(e -> scheduleAppointment());
     }
@@ -270,6 +272,113 @@ public class Nurse extends User {
 			@Override public void handle(ActionEvent e) {
 				secondaryStage.setScene(nursePortalScene);
 				secondaryStage.show();
+			}
+		});
+	}
+	
+    private void editPatient() {
+		GridPane editPane = new GridPane();
+		editPane.setAlignment(Pos.CENTER);
+		editPane.setHgap(5.5);
+		editPane.setVgap(15);
+		
+		Label firstNameLabel = new Label("First name: ");
+		Label lastNameLabel = new Label("Last name: ");
+		Label emailLabel = new Label("Email: ");
+		Label heightLabel = new Label("Height: ");
+		Label weightLabel = new Label("Weight: ");
+		Label saveChanges = new Label("Save changes");
+		Label IDLabel = new Label("Enter ID: ");
+		
+		TextField firstNameTextField = new TextField();
+		firstNameTextField.setEditable(false);
+		TextField lastNameTextField = new TextField();
+		lastNameTextField.setEditable(false);
+		TextField emailTextField = new TextField();
+		emailTextField.setEditable(false);
+		TextField heightTextField = new TextField();
+		heightTextField.setEditable(false);
+		TextField weightTextField = new TextField();
+		weightTextField.setEditable(false);
+		TextField IDTextField = new TextField();
+		
+		Button searchButton = new Button("Search");
+		Button backButton1 = new Button("Back");
+		Button saveButton = new Button("Save");
+		
+		editPane.add(backButton1, 0, 0);
+		editPane.add(searchButton, 2, 2);
+		editPane.add(IDLabel, 0, 2);
+		editPane.add(IDTextField, 1, 2);
+		editPane.addRow(2, IDLabel, IDTextField, searchButton);
+		editPane.addRow(3, firstNameLabel, firstNameTextField);
+		editPane.addRow(4, lastNameLabel, lastNameTextField);    
+		editPane.addRow(5, emailLabel, emailTextField);
+		editPane.addRow(6, heightLabel, heightTextField);
+		editPane.addRow(7, weightLabel, weightTextField);
+		editPane.add(saveButton, 1, 9);
+		
+		Scene editScene = new Scene(editPane, 600, 350);
+		
+		this.secondaryStage.setScene(editScene);
+		this.secondaryStage.show();
+		
+		Database userDatabase = new Database();
+		userDatabase.initializeDatabase();
+		
+		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				if(firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || heightTextField.getText().isEmpty() || weightTextField.getText().isEmpty()) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Warning");
+					alert.setHeaderText("Information Missing.");
+					alert.setContentText("Make sure all fields are complete.");
+					alert.showAndWait();
+				}
+				else{
+					Patient p = (Patient)searchPatient(IDTextField.getText());
+					p.setName(firstNameTextField.getText() + lastNameTextField.getText());
+					p.setEmail(emailTextField.getText());
+					p.setHeight(Double.parseDouble(heightTextField.getText()));
+					p.setWeight(Double.parseDouble(weightTextField.getText()));
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Success!");
+					alert.setHeaderText("User successfuly edited.");
+					alert.showAndWait();
+				}
+			}
+		});
+		
+		backButton1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				secondaryStage.setScene(nursePortalScene);
+				secondaryStage.show();
+			}
+		});
+		
+		searchButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				Patient p = (Patient)searchPatient(IDTextField.getText());
+				if(p.equals(null)) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Warning");
+					alert.setHeaderText("User not found.");
+					alert.setContentText("A user with the patient ID entered couldn't be found.");
+					alert.showAndWait();
+				}
+				else {
+					firstNameTextField.setText(p.getName());
+					firstNameTextField.setEditable(true);
+					lastNameTextField.setText(p.getName());
+					lastNameTextField.setEditable(true);
+					emailTextField.setText(p.getEmail());		
+					emailTextField.setEditable(true);
+					weightTextField.setText(String.valueOf(p.getWeight()));		
+					weightTextField.setEditable(true);
+					heightTextField.setText(String.valueOf(p.getHeight()));		
+					heightTextField.setEditable(true);
+				}
+				
 			}
 		});
 	}
