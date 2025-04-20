@@ -1,5 +1,6 @@
 # CSE360-Group17
 Introduction
+
 This repository contains the Java code for our comprehensive Medical Management System, designed to streamline the operations of healthcare facilities. The system includes chat functionality for communication between patients and healthcare providers, robust medical record history management, and efficient appointment scheduling.
 
 Features
